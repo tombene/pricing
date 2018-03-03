@@ -44,6 +44,7 @@ Task Breakdown:
 	Discount API:  Casey
 	eBay API:  Tyler
 	Walmart API:  Thomas
+	Google Ad API:  Time permitting
 
 AJAX Desired Return:
 	Price
@@ -53,3 +54,6 @@ AJAX Desired Return:
 	UPC
 	Image (multiple if possible)
 	URL link to purchase
+
+	WireFrame:
+	<img src="assets/images/rsz_priceitwireframe.jpg">
