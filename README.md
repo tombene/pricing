@@ -53,3 +53,6 @@ AJAX Desired Return:
 	UPC
 	Image (multiple if possible)
 	URL link to purchase
+
+	WireFrame:
+	<img src="assets/images/PriceItWireFrame.jpg"/>
