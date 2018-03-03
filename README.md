@@ -5,6 +5,7 @@ Username: tschmauch
 Password: UofUbc!2018
 
 #Walmart API Info
+URL: https://developer.walmartlabs.com/apps/mykeys
 Username: tbenedict
 Password: UofUbc!2018
 
