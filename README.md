@@ -55,4 +55,4 @@ AJAX Desired Return:
 	URL link to purchase
 
 	WireFrame:
-	![Wireframe](assets/images/PriceItWireFrame.jpg "Wireframe")
+	![Wireframe](assets/images/PriceItWireFrame.jpg)
