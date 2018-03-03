@@ -12,15 +12,34 @@
 
 <body>
 	<div class="row">
-		<div class="col-md-4" id="amazon-container"></div>
-		<div class="col-md-4" id="walmart-container"></div>
-		<div class="col-md-4" id="ebay-container"></div>
+
 	</div>
-	<div class="row">
-		<div class="col-md-4" id="amazon-ad-container"></div>
-		<div class="col-md-4" id="walmart-ad-container"></div>
-		<div class="col-md-4" id="ebay-ad-container"></div>
+	<div class="container">
+		<div class="row game-status">
+			<div class="col-md-8">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search..." id="search-input">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" id="btn-search">Search</button>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4" id="amazon-container"></div>
+			<div class="col-md-4" id="walmart-container"></div>
+			<div class="col-md-4" id="ebay-container"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-4" id="amazon-ad-container"></div>
+			<div class="col-md-4" id="walmart-ad-container"></div>
+			<div class="col-md-4" id="ebay-ad-container"></div>
+		</div>
 	</div>
+
+
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/walmartapi.js"></script>
 	<script src="assets/js/amazonapi.js"></script>
