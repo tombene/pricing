@@ -43,6 +43,7 @@ Task Breakdown:
 	Discount API:  Casey
 	eBay API:  Tyler
 	Walmart API:  Thomas
+	Google Ad API:  Time permitting
 
 AJAX Desired Return:
 	Price
