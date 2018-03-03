@@ -35,3 +35,20 @@ Project Description:
 
 	Web app then displays product information, URL link to purchase, image and price for each vendor.  If any coupons available, display coupon below vendor results.
 	Website will have User Login functionality, saves search history, user profile, etc.
+	Potential additional functionality: Integrate with GoogleAd API and serve up an ad under each vendor's product result for that product
+
+Task Breakdown:
+	HTML/UI/CSS:  Group collaborate
+	Amazon API:  Merek
+	Discount API:  Casey
+	eBay API:  Tyler
+	Walmart API:  Thomas
+
+AJAX Desired Return:
+	Price
+	Model
+	Description
+	Name
+	UPC
+	Image (multiple if possible)
+	URL link to purchase
