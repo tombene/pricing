@@ -41,10 +41,12 @@ Project Description:
 Task Breakdown:
 	HTML/UI/CSS:  Group collaborate
 	Amazon API:  Merek
-	Discount API:  Casey
+	User Interface/Discount API:  Casey
 	eBay API:  Tyler
 	Walmart API:  Thomas
 	Google Ad API:  Time permitting
+
+	Use our API's to pull data to the page that has an item the user has requested. One for Amazon, one for eBay, and one for Walmart. We also want to pull ads from Google and coupons from Discount API that are related to the Users input
 
 AJAX Desired Return:
 	Price
@@ -52,7 +54,7 @@ AJAX Desired Return:
 	Description
 	Name
 	UPC
-	Image (multiple if possible)
+	Image (5 if possible)
 	URL link to purchase
 
 	WireFrame:
