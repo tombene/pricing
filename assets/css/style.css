@@ -1,0 +1,16 @@
+.navbar {
+	background-color: white;
+	height: 70px;
+	font-size: 25px;
+}
+
+#PriceItLogo {
+	margin-top: -25px;
+margin-left: -180px;
+}
+
+#username-input,
+#email-input,
+#password-input {
+	align-self: auto;
+}
