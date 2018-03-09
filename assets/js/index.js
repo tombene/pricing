@@ -3,7 +3,7 @@ $('#btn-search').on('click',function(){
 	var searchString = $('#search-input').val();
 	walmart.getItems(searchString, displayItems);
 	// amazon.getItems(searchString, displayItems);
-	// ebay.getItems(searchString, displayItems);
+	ebay.getItems(searchString, displayItems);
 	$('#search-input').val('');
 });
 
@@ -14,6 +14,7 @@ function displayItems(data, containerName){
 	div.append('<p>'+data.model+'</p>');
 	div.append('<p>'+data.upc+'</p>');
 	div.append('<p>'+data.description+'</p>');
+
 	for(var i = 0;i < data.image.length;i++){
 		var imgTag = $('<img>').attr('src',data.image[i]).addClass(containerName+'-img-'+i);
 		div.append(imgTag);
