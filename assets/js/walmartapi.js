@@ -15,6 +15,7 @@ var walmart = {
 			method: "GET"
 		}).then(function(response){
 			var i = 0;
+			walmart.currentItem.image = [];
 			walmart.currentItem.price = response.items[i].salePrice;
 			walmart.currentItem.model = response.items[i].modelNumber;
 			walmart.currentItem.description = response.items[i].shortDescription;
