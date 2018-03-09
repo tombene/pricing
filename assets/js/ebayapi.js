@@ -25,7 +25,6 @@ var ebay = {
 			ebay.currentItem.upc = data.findItemsByKeywordsResponse[i].searchResult[0].item[0].itemId[0];
 			ebay.currentItem.image.push(data.findItemsByKeywordsResponse[i].searchResult[0].item[0].galleryURL[0]);
 			ebay.currentItem.url = data.findItemsByKeywordsResponse[i].searchResult[0].item[0].viewItemURL[0];
-			console.log(ebay.currentItem);
 			displayItems(ebay.currentItem, 'ebay');
 		});
 	}}

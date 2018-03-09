@@ -28,7 +28,6 @@ var walmart = {
 				walmart.currentItem.image.push(response.items[i].imageEntities[j].thumbnailImage);
 			}
 			walmart.currentItem.url = response.items[i].productUrl;
-			console.log(walmart.currentItem);
 			displayItems(walmart.currentItem, 'walmart');
 		});
 	}
