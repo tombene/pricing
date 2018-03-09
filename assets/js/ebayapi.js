@@ -16,7 +16,6 @@ var ebay = {
 			method: "GET"
 		}).then(function (response) {
 			var i = 0;
-			console.log(JSON.parse(response));
 			var data = JSON.parse(response);
 			ebay.currentItem.price = data.findItemsByKeywordsResponse[i].searchResult[0].item[0].sellingStatus[0].currentPrice[0].__value__;
 			ebay.currentItem.model = data.findItemsByKeywordsResponse[i].searchResult[0].item[0].itemId[0];
