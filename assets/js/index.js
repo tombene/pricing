@@ -14,6 +14,7 @@ function displayItems(data, containerName){
 	div.append('<p>'+data.model+'</p>');
 	div.append('<p>'+data.upc+'</p>');
 	div.append('<p>'+data.description+'</p>');
+
 	for(var i = 0;i < data.image.length;i++){
 		var imgTag = $('<img>').attr('src',data.image[i]).addClass(containerName+'-img-'+i);
 		div.append(imgTag);
