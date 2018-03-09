@@ -25,7 +25,7 @@ var walmart = {
 				numImages = 5;
 			}
 			for(var j=0;j<numImages;j++){
-				walmart.currentItem.image[j].push(response.items[i].imageEntities[j].thumbnailImage);
+				walmart.currentItem.image.push(response.items[i].imageEntities[j].thumbnailImage);
 			}
 			walmart.currentItem.url = response.items[i].productUrl;
 			console.log(walmart.currentItem);
