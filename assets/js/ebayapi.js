@@ -25,12 +25,13 @@ var ebay = {
 			ebay.currentItem.upc = data.findItemsByKeywordsResponse[i].searchResult[0].item[0].itemId[0];
 			// for (var j; j < 5; j++) {
 			// 	ebay.currentItem.image[j] = data.findItemsByKeywordsResponse[i].searchResult[0].item[0].sellingStatus[0].currentPrice[0].__value__;
-				ebay.currentItem.url = data.findItemsByKeywordsResponse[i].searchResult[0].item[0].viewItemURL[0];
-				console.log(ebay.currentItem);
-			}
+			ebay.currentItem.url = data.findItemsByKeywordsResponse[i].searchResult[0].item[0].viewItemURL[0];
+			console.log(ebay.currentItem);
+		}
 			// renderCallBack(ebay.currentItem, 'ebay');
-		)}
+		)
 	}
+}
 
 
 ebay.getItems();
