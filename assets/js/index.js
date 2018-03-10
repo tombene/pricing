@@ -13,7 +13,7 @@ function displayItems(data, containerName){
 	div.append('<p>'+data.name+'</p>');
 	div.append('<p>'+data.model+'</p>');
 	div.append('<p>'+data.upc+'</p>');
-	div.append('<p>'+data.description+'</p>');
+	div.append('<p class="hide-me" id="item-desc">'+data.description+'</p>');
 
 	for(var i = 0;i < data.image.length;i++){
 		var imgTag = $('<img>').attr('src',data.image[i]).addClass(containerName+'-img-'+i);
@@ -28,4 +28,15 @@ function removeContainerChildren(){
 	$('.amazon-div').remove();
 	$('.ebay-div').remove();
 }
+
+$(document).on('click','#item-desc',function(){
+	if($(this).attr('class') === 'hide-me' ){
+		$(this).attr('class','show-me');
+	}else{
+		$(this).attr('class','hide-me');
+	}
+	
+});
+
+
 
