@@ -53,7 +53,7 @@ function getAmazonItemInfo(amzSearchKeywords) {
 	var signature = sha256(signingKey, PrivateKey);
 	signature = encodeURIComponent(signature);
 
-	var amazonUrl = "http://webservices.amazon.com/onca/xml?" + paramString + "&Signature=" + signature;
+	var amazonUrl = "https://webservices.amazon.com/onca/xml?" + paramString + "&Signature=" + signature;
 	console.log('hit');
 	console.log(amazonUrl);
 	amzSearch(amazonUrl);
