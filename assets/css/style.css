@@ -48,7 +48,8 @@ footer {
 }
  
 .paragraphs,
-p {
+p,
+h1 {
 	font-family: 'Cabin Sketch', cursive;
 	font-size: 20px;
 
@@ -70,9 +71,4 @@ footer {
 
 .carousel-inner{
 	height: 15vh;
-}
-
-.discount-container {
-margin-left: 10px;
-width: 15%;
 }

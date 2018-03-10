@@ -6,6 +6,7 @@ $('#btn-search').on('click', function () {
 	// amazon.getItems(searchString, displayItems);
 	// ebay.getItems(searchString, displayItems);
 	$('#search-input').val('');
+	$('#discount-container').empty();
 });
 
 function displayItems(data, containerName) {
