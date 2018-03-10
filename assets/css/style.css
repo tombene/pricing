@@ -5,6 +5,18 @@
 	font-family: 'Cabin Sketch', cursive;
 }
 
+.navbar-header {
+	height: 100%;
+}
+
+.nav-container {
+	height: 100%;
+}
+
+.navbar-collapse {
+	background-color: white;
+}
+
 #PriceItLogo {
 	margin-top: -25px;
 
@@ -35,7 +47,8 @@ footer {
 	width: 45%;
 }
  
-.paragraphs {
+.paragraphs,
+p {
 	font-family: 'Cabin Sketch', cursive;
 	font-size: 20px;
 
@@ -46,6 +59,7 @@ footer {
 	height: 5%;
 	bottom: 0;
 	width: 100%;
+	margin-top: 10px!important;
 }
 
 .glyphicon-chevron-left::before,
@@ -53,12 +67,12 @@ footer {
 .carousel-indicators {
 	color: black;
 }
-/* the carousel is built around the images displayed in eBay's carousel. The images are 64px X 64px to display 5 images we need a width of 320px */
-.carousel {
-	width: 320px;
-	height: 64px;
-}
 
 .carousel-inner{
 	height: 15vh;
+}
+
+.discount-container {
+margin-left: 10px;
+width: 15%;
 }
