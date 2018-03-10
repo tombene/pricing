@@ -5,7 +5,7 @@ var walmart = {
 		description: '',
 		name: '',
 		upc: '',
-		image: ['', '', '', '', ''],
+		image: [],
 		url: ''
 	},
 	getItems: function (searchTerm, displayItems) {
@@ -15,6 +15,7 @@ var walmart = {
 			method: "GET"
 		}).then(function (response) {
 			var i = 0;
+			walmart.currentItem.image = [];
 			walmart.currentItem.price = response.items[i].salePrice;
 			walmart.currentItem.model = response.items[i].modelNumber;
 			walmart.currentItem.description = response.items[i].shortDescription;
@@ -24,11 +25,10 @@ var walmart = {
 			if (numImages > 5) {
 				numImages = 5;
 			}
-			for (var j = 0; j < numImages; j++) {
-				walmart.currentItem.image[j] = response.items[i].imageEntities[j].thumbnailImage;
+			for(var j=0;j<numImages;j++){
+				walmart.currentItem.image.push(response.items[i].imageEntities[j].thumbnailImage);
 			}
 			walmart.currentItem.url = response.items[i].productUrl;
-			console.log(walmart.currentItem);
 			displayItems(walmart.currentItem, 'walmart');
 		});
 	}

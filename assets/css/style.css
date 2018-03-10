@@ -57,6 +57,7 @@ h1 {
 
 footer {
 	position: fixed;
+	bottom: 0;
 	height: 5%;
 	bottom: 0;
 	width: 100%;
@@ -71,4 +72,31 @@ footer {
 
 .carousel-inner{
 	height: 15vh;
+}
+
+.ebay-div, .walmart-div, .amazon-div {
+	padding: 0 10px 10px 10px;
+	border: 3px dashed #ccc;
+	margin: 5px 10px;
+}
+
+#ebay-container, #walmart-container, #amazon-container {
+	margin-bottom: 50px;
+}
+p.hide-me {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
+P.show-me {
+	white-space: normal;
+	overflow: visible;
+	text-overflow: unset;
+	max-width: 1000px;
+}
+
+#item-desc:hover{
+	cursor: pointer;
 }
