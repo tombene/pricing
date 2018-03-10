@@ -3,8 +3,9 @@ $('#btn-search').on('click', function () {
 		removeContainerChildren();
 		var searchString = $('#search-input').val();
 		walmart.getItems(searchString, displayItems);
-		// amazon.getItems(searchString, displayItems);
+		amazon.getItems(searchString, displayItems);
 		ebay.getItems(searchString, displayItems);
+		discount.getCoupons(searchString);
 		$('#search-input').val('');
 	}
 	else {
@@ -33,6 +34,7 @@ function removeContainerChildren() {
 	$('.walmart-div').remove();
 	$('.amazon-div').remove();
 	$('.ebay-div').remove();
+	$('#discount-container').empty();
 }
 
 $(document).on('click', '#item-desc', function () {

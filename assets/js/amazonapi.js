@@ -1,7 +1,6 @@
 
-// The below functions format and encode the Amazon url.
-var amzSearchKeywords = "Dominion%20Board%20Game";
-getAmazonItemInfo(amzSearchKeywords);
+// The below section formats and creates the amazon url with correctly encoded keys and timestamp.
+/////////////////////////////////////////////////////////////////////////
 
 function sha256(stringToSign, secretKey) {
 	var hex = CryptoJS.HmacSHA256(stringToSign, secretKey);
@@ -28,14 +27,14 @@ function timestamp() {
 	return date + "T" + time + "Z";
 }
 
-function getAmazonItemInfo(amzSearchKeywords) {
+function getAmazonURL(searchTerm) {
 	var PrivateKey = "Z+wOlQop9dvlRNXLlEJUDfndNKx0oXODfYl5SJd6";
 	var PublicKey = "AKIAJRYOQWC2PWS5IWMQ";
 	var AssociateTag = "priceit05-20";
 
 	var parameters = [];
 	parameters.push("AWSAccessKeyId=" + PublicKey);
-	parameters.push("Keywords=" + amzSearchKeywords);
+	parameters.push("Keywords=" + searchTerm);
 	parameters.push("Availability=Available");
 	parameters.push("Operation=ItemSearch");
 	parameters.push("SearchIndex=All");
@@ -54,11 +53,11 @@ function getAmazonItemInfo(amzSearchKeywords) {
 	signature = encodeURIComponent(signature);
 
 	var amazonUrl = "https://webservices.amazon.com/onca/xml?" + paramString + "&Signature=" + signature;
-	console.log('hit');
-	console.log(amazonUrl);
-	amzSearch(amazonUrl);
+
+	return amazonUrl;
 }
 
+// The section below then converts the amazon results from xml to JSON.
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 // Changes XML to JSON
@@ -103,18 +102,60 @@ function xmlToJson(xml) {
 //////////////////////////////////////////////////////////////////////////////////
 
 
-function amzSearch(amazonUrl) {
-	$.ajax({
-		url: amazonUrl,
-		method: "GET",
-		crossDomain: true
-	}).then(function (response) {
-		var results = xmlToJson(response);
-		var amazonResults = results.ItemSearchResponse.Items;
-		var i = 0;
-		console.log(results);
-		console.log(amazonResults.Item[i].ItemAttributes.Title);
 
-	});
+var amazon = {
+	currentItem: {
+		price: 0,
+		model: '',
+		description: '',
+		name: '',
+		upc: '',
+		image: [],
+		url: '',
+		primeEligible: ''
+	},
+	getItems: function (searchTerm, displayItems) {
+		var amazonUrl = getAmazonURL(searchTerm);
+		$.ajax({
+			// function below uses searchTerm to generate URL for amazon API
+			url: amazonUrl,
+			method: "GET",
+			crossDomain: true
+		}).then(function (response) {
+			var results = xmlToJson(response);
+			var amazonResults = results.ItemSearchResponse.Items;
+			var i = 0;
+			
+			amazon.currentItem.image = [];
+			amazon.currentItem.price = stringReplace(amazonResults.Item[i].Offers.Offer.OfferListing.Price.FormattedPrice);
+			amazon.currentItem.primeEligible = stringReplace(amazonResults.Item[i].Offers.Offer.OfferListing.IsEligibleForPrime);
+			amazon.currentItem.model = stringReplace(amazonResults.Item[i].ItemAttributes.Model);
+			amazon.currentItem.description;
+			amazon.currentItem.name = stringReplace(amazonResults.Item[i].ItemAttributes.Title);
+			amazon.currentItem.upc = stringReplace(amazonResults.Item[i].ItemAttributes.UPC);
+			amazon.currentItem.url = stringReplace(amazonResults.Item[i].DetailPageURL);
+			// Loops through images to store but sets the limit at 5.
+			var numImages = amazonResults.Item[i].ImageSets.ImageSet.length;
+			if(numImages>5){
+				numImages = 5;
+			}
+			for(var j = 0;j < numImages; j++){
+				amazon.currentItem.image.unshift(stringReplace(amazonResults.Item[i].ImageSets.ImageSet[j].SmallImage.URL));
+			}
+			// Amazon uses a feature array to hold descriptions. This loops through and makes it into a string to display later.
+			var numFeatures = amazonResults.Item[i].ItemAttributes.Feature.length;
+			for (var k = 0; k < numFeatures; k++) {
+				amazon.currentItem.description += stringReplace(amazonResults.Item[i].ItemAttributes.Feature[k]) + '<br>';
+			}
 
+			displayItems(amazon.currentItem, 'amazon');
+// end of then
+		});
+	}
+};
+
+// This removes unneeded text on data strings from Amazon.
+function stringReplace(string) {
+	return JSON.stringify(string).slice(10).replace('"', '').replace('}', '').replace('$', '');
+	
 };
