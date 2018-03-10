@@ -69,3 +69,21 @@ footer {
 	border: 3px dashed #ccc;
 	margin: 5px 10px;
 }
+
+p.hide-me {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
+P.show-me {
+	white-space: normal;
+	overflow: visible;
+	text-overflow: unset;
+	max-width: 1000px;
+}
+
+#item-desc:hover{
+	cursor: pointer;
+}
