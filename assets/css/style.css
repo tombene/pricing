@@ -43,6 +43,7 @@ footer {
 
 footer {
 	position: fixed;
+	bottom: 0;
 	height: 5%;
 	bottom: 0;
 	width: 100%;
@@ -65,7 +66,9 @@ footer {
 
 .ebay-div, .walmart-div, .amazon-div {
 	padding: 0 10px 10px 10px;
-	margin-bottom: 50px;
 	border: 3px dashed #ccc;
 	margin: 5px 10px;
 }
+
+#ebay-container, #walmart-container, #amazon-container {
+	margin-bottom: 50px;
