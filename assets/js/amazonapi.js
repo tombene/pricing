@@ -1,52 +1,120 @@
 
+// The below functions format and encode the Amazon url.
+var amzSearchKeywords = "Dominion%20Board%20Game";
+getAmazonItemInfo(amzSearchKeywords);
 
-
-// http://webservices.amazon.com/onca/xml?
-// Service=AWSECommerceService&
-// AWSAccessKeyId=[AWS Access Key ID]&
-// AssociateTag=[Associate ID]&  
-// Operation=ItemSearch&
-// Keywords=the%20hunger%20games&
-// SearchIndex=Books
-// &Timestamp=[YYYY-MM-DDThh:mm:ssZ]
-// &Signature=[Request Signature]
-
-
-var randomFormat = "MM/DD/YYYY";
-// var convertedDate = moment(todaysDate, randomFormat);
-// console.log(todaysDate);
-
-var regionName = "us-west-1";
-var serviceName = "apigateway";
-var amzAccessKey = "AKIAJRYOQWC2PWS5IWMQ";
-var amzAssociateID = "priceit05-20";
-var amzSearchKeywords = "Dominion";
-var encodedSecretKey = getSignatureKey(amzAccessKey, amzTimestamp, regionName, serviceName);
-var amzSecretKey = "Z+wOlQop9dvlRNXLlEJUDfndNKx0oXODfYl5SJd6";
-var amzTimestamp = moment().format("YYYY-MM-DDThh:mm:ssZ");
-var amzUrl = "https://webservices.amazon.com/onca/xml?Service=AWSECommerceService&AWSAccessKeyId=" + amzAccessKey + "&AssociateTag=" + amzAssociateID + "&Operation=ItemSearch&Keywords=" + amzSearchKeywords + "&Signature=" + encodedSecretKey + "&Timestamp=" + amzTimestamp;
-var url = "http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&AWSAccessKeyId=AKIAJRYOQWC2PWS5IWMQ&AssociateTag=priceit05-20&Operation=ItemSearch&Keywords=the%20hunger%20games&SearchIndex=Books"
-
-amzSearch();
-
-function getSignatureKey(key, dateStamp, regionName, serviceName) {
-	var kDate = CryptoJS.HmacSHA256(dateStamp, "AWS4" + key);
-	var kRegion = CryptoJS.HmacSHA256(regionName, kDate);
-	var kService = CryptoJS.HmacSHA256(serviceName, kRegion);
-	var kSigning = CryptoJS.HmacSHA256("aws4_request", kService);
-	return kSigning;
+function sha256(stringToSign, secretKey) {
+	var hex = CryptoJS.HmacSHA256(stringToSign, secretKey);
+	return hex.toString(CryptoJS.enc.Base64);
 }
 
+function timestamp() {
+	var date = new Date();
+	var y = date.getUTCFullYear().toString();
+	var m = (date.getUTCMonth() + 1).toString();
+	var d = date.getUTCDate().toString();
+	var h = date.getUTCHours().toString();
+	var min = date.getUTCMinutes().toString();
+	var s = date.getUTCSeconds().toString();
 
-function amzSearch() {
-$.ajax({
-	url: amzUrl,
-	method: "GET",
-	crossDomain: true
-}).then(function(response) {
-	var results = response;
-	console.log('amazon',results);
+	if (m.length < 2) { m = "0" + m; }
+	if (d.length < 2) { d = "0" + d; }
+	if (h.length < 2) { h = "0" + h; }
+	if (min.length < 2) { min = "0" + min; }
+	if (s.length < 2) { s = "0" + s }
 
-});
+	var date = y + "-" + m + "-" + d;
+	var time = h + ":" + min + ":" + s;
+	return date + "T" + time + "Z";
+}
+
+function getAmazonItemInfo(amzSearchKeywords) {
+	var PrivateKey = "Z+wOlQop9dvlRNXLlEJUDfndNKx0oXODfYl5SJd6";
+	var PublicKey = "AKIAJRYOQWC2PWS5IWMQ";
+	var AssociateTag = "priceit05-20";
+
+	var parameters = [];
+	parameters.push("AWSAccessKeyId=" + PublicKey);
+	parameters.push("Keywords=" + amzSearchKeywords);
+	parameters.push("Availability=Available");
+	parameters.push("Operation=ItemSearch");
+	parameters.push("SearchIndex=All");
+	parameters.push("ResponseGroup=" + encodeURIComponent('Images,ItemAttributes,Offers'));
+	parameters.push("Service=AWSECommerceService");
+	parameters.push("Timestamp=" + encodeURIComponent(timestamp()));
+	parameters.push("Version=2011-08-01");
+	parameters.push("AssociateTag=" + AssociateTag);
+
+	parameters.sort();
+	var paramString = parameters.join('&');
+
+	var signingKey = "GET\n" + "webservices.amazon.com\n" + "/onca/xml\n" + paramString
+
+	var signature = sha256(signingKey, PrivateKey);
+	signature = encodeURIComponent(signature);
+
+	var amazonUrl = "http://webservices.amazon.com/onca/xml?" + paramString + "&Signature=" + signature;
+	console.log('hit');
+	console.log(amazonUrl);
+	amzSearch(amazonUrl);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+// Changes XML to JSON
+function xmlToJson(xml) {
+
+	// Create the return object
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+			obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	if (xml.hasChildNodes()) {
+		for (var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof (obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof (obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+};
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+function amzSearch(amazonUrl) {
+	$.ajax({
+		url: amazonUrl,
+		method: "GET",
+		crossDomain: true
+	}).then(function (response) {
+		var results = xmlToJson(response);
+		var amazonResults = results.ItemSearchResponse.Items;
+		var i = 0;
+		console.log(results);
+		console.log(amazonResults.Item[i].ItemAttributes.Title);
+
+	});
 
 };
