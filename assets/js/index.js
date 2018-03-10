@@ -28,7 +28,7 @@ function removeContainerChildren() {
 	$('.walmart-div').remove();
 	$('.amazon-div').remove();
 	$('.ebay-div').remove();
-	$('#discount-container').remove();
+	$('#discount-container').empty();
 }
 
 
