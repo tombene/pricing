@@ -1,10 +1,12 @@
-$('#btn-search').on('click',function(){
+$('#btn-search').on('click', function () {
 	removeContainerChildren();
 	var searchString = $('#search-input').val();
 	walmart.getItems(searchString, displayItems);
+	discount.getCoupons(searchString);
 	// amazon.getItems(searchString, displayItems);
 	ebay.getItems(searchString, displayItems);
 	$('#search-input').val('');
+
 });
 
 function displayItems(data, containerName){
@@ -19,14 +21,15 @@ function displayItems(data, containerName){
 		var imgTag = $('<img>').attr('src',data.image[i]).addClass(containerName+'-img-'+i);
 		div.append(imgTag);
 	}
-	div.append('<p><a href="'+data.url+'">BUY HERE!</a></p>');
-	$('#'+containerName+'-container').append(div);
+	div.append('<p><a href="' + data.url + '">BUY HERE!</a></p>');
+	$('#' + containerName + '-container').append(div);
 }
 
-function removeContainerChildren(){
+function removeContainerChildren() {
 	$('.walmart-div').remove();
 	$('.amazon-div').remove();
 	$('.ebay-div').remove();
+	$('#discount-container').empty();
 }
 
 $(document).on('click','#item-desc',function(){
