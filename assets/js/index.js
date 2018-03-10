@@ -6,7 +6,7 @@ $('#btn-search').on('click', function () {
 	// amazon.getItems(searchString, displayItems);
 	// ebay.getItems(searchString, displayItems);
 	$('#search-input').val('');
-	$('#discount-container').empty();
+
 });
 
 function displayItems(data, containerName) {
@@ -28,6 +28,7 @@ function removeContainerChildren() {
 	$('.walmart-div').remove();
 	$('.amazon-div').remove();
 	$('.ebay-div').remove();
+	$('#discount-container').remove();
 }
 
 
