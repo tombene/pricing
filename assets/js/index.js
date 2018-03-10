@@ -2,7 +2,7 @@ $('#btn-search').on('click',function(){
 	removeContainerChildren();
 	var searchString = $('#search-input').val();
 	walmart.getItems(searchString, displayItems);
-	// amazon.getItems(searchString, displayItems);
+	amazon.getItems(searchString, displayItems);
 	ebay.getItems(searchString, displayItems);
 	$('#search-input').val('');
 });
