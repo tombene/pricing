@@ -5,6 +5,10 @@
 	font-family: 'Cabin Sketch', cursive;
 }
 
+#loginButton,#signoutButton,#registerButton,#accountButton {
+	display: none;
+}
+
 .navbar-header {
 	height: 100%;
 }
@@ -80,7 +84,7 @@ footer {
 	margin: 5px 10px;
 }
 
-#ebay-container, #walmart-container, #amazon-container {
+#ebay-container, #walmart-container, #amazon-container, #discount-container {
 	margin-bottom: 50px;
 }
 p.hide-me {
