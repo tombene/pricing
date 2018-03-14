@@ -5,6 +5,10 @@
 	font-family: 'Cabin Sketch', cursive;
 }
 
+#loginButton,#signoutButton,#registerButton,#accountButton {
+	display: none;
+}
+
 .navbar-header {
 	height: 100%;
 }
