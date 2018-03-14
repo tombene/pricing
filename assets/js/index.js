@@ -1,4 +1,5 @@
 $('#btn-search').on('click', function () {
+
 	if (localStorage.getItem('loggedIn')) {
 		removeContainerChildren();
 		var searchString = $('#search-input').val();
