@@ -71,24 +71,31 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
+				<form method="post">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Enter a product here!" id="search-input">
 					<!-- Search input/button -->
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" id="btn-search">PriceIt!</button>
+						<input class="btn btn-default" type="submit" value="PriceIt!" id="btn-search">PriceIt!</input>
 					</span>
 				</div>
-				<!-- /input-group -->
+			</form>
 			</div>
+			<!-- /input-group -->
 		</div>
-
 	</div>
 
 
 	<div class="row">
-		<div class="col-md-4" id="amazon-container"></div>
-		<div class="col-md-4" id="walmart-container"></div>
-		<div class="col-md-4" id="ebay-container"></div>
+		<div class="col-md-4" id="amazon-container">
+			<p class="company-name">AMAZON</p>
+		</div>
+		<div class="col-md-4" id="walmart-container">
+			<P class="company-name">WALMART</P>
+		</div>
+		<div class="col-md-4" id="ebay-container">
+			<P class="company-name">EBAY</P>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4" id="amazon-ad-container"></div>
@@ -118,9 +125,9 @@
 	<script src="assets/js/index.js"></script>
 	<script src="assets/js/walmartapi.js"></script>
 	<script src="assets/js/amazonapi.js"></script>
- 	<script src="assets/js/ebayapi.js"></script>
-	 <script src="assets/js/discountapi.js"></script>
-	 <script src="assets/js/register.js"></script>
+	<script src="assets/js/ebayapi.js"></script>
+	<script src="assets/js/discountapi.js"></script>
+	<script src="assets/js/register.js"></script>
 
 
 

@@ -23,8 +23,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 		if (path === 'register.html' || path === 'login.html') {
 			window.location = '/index.html';
 		}
-		$('#btn-search').on('click', function () {
-
+		$('#btn-search').on('click', function (event) {
+			event.preventDefault(event);
 			if (localStorage.getItem('loggedIn')) {
 				removeContainerChildren();
 				var searchString = $('#search-input').val();
