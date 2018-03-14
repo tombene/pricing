@@ -115,53 +115,103 @@ var amazon = {
 		primeEligible: ''
 	},
 	getItems: function (searchTerm, displayItems) {
-		var amazonUrl = getAmazonURL(searchTerm);
+		var amazonUrl = getAmazonURL(encodeURIComponent(searchTerm));
 		$.ajax({
 			// function below uses searchTerm to generate URL for amazon API
 			url: amazonUrl,
 			method: "GET",
 			crossDomain: true
 		}).then(function (response) {
-			// console.log(response);
 			var results = xmlToJson(response);
+			// console.log(results);
 			var amazonResults = results.ItemSearchResponse.Items;
 			var i = 0;
-			
-			amazon.currentItem.image = [];
-			amazon.currentItem.price = stringReplace(amazonResults.Item[i].Offers.Offer.OfferListing.Price.FormattedPrice);
-			amazon.currentItem.primeEligible = stringReplace(amazonResults.Item[i].Offers.Offer.OfferListing.IsEligibleForPrime);
-			amazon.currentItem.model = stringReplace(amazonResults.Item[i].ItemAttributes.Model);
-			amazon.currentItem.description;
-			amazon.currentItem.name = stringReplace(amazonResults.Item[i].ItemAttributes.Title);
-			amazon.currentItem.upc = stringReplace(amazonResults.Item[i].ItemAttributes.UPC);
-			amazon.currentItem.url = stringReplace(amazonResults.Item[i].DetailPageURL);
-			// Loops through images to store but sets the limit at 5.
-			var numImages = amazonResults.Item[i].ImageSets.ImageSet.length;
-			if(numImages>5){
-				numImages = 5;
+			for (var j = 0; j < 10; j++) {
+				if (amazonResults.Request.IsValid === 'True') {
+					i = j;
+					j = 11;
+				}
 			}
-			for(var j = 0;j < numImages; j++){
-				amazon.currentItem.image.unshift(stringReplace(amazonResults.Item[i].ImageSets.ImageSet[j].SmallImage.URL));
-			}
-			// Amazon uses a feature array to hold descriptions. This loops through and makes it into a string to display later.
-			var numFeatures = amazonResults.Item[i].ItemAttributes.Feature.length;
-			for (var k = 0; k < numFeatures; k++) {
-				amazon.currentItem.description += stringReplace(amazonResults.Item[i].ItemAttributes.Feature[k]) + '<br>';
-			}
+			var numResults = parseInt(stringReplace(amazonResults.TotalResults));
+			if (numResults !== 0) {
+				if (numResults > 1) {
+					amazon.currentItem.image = [];
+					amazon.currentItem.price = stringReplace(amazonResults.Item[i].Offers.Offer.OfferListing.Price.FormattedPrice);
+					amazon.currentItem.primeEligible = stringReplace(amazonResults.Item[i].Offers.Offer.OfferListing.IsEligibleForPrime);
+					amazon.currentItem.model = stringReplace(amazonResults.Item[i].ItemAttributes.Model);
+					amazon.currentItem.description;
+					amazon.currentItem.name = stringReplace(amazonResults.Item[i].ItemAttributes.Title);
+					amazon.currentItem.upc = stringReplace(amazonResults.Item[i].ItemAttributes.UPC);
+					amazon.currentItem.url = stringReplace(amazonResults.Item[i].DetailPageURL);
+					// Loops through images to store but sets the limit at 5.
+					var numImages = amazonResults.Item[i].ImageSets.ImageSet.length;
+					if (numImages > 5) {
+						numImages = 5;
+					}
+					for (var j = 0; j < numImages; j++) {
+						amazon.currentItem.image.unshift(stringReplace(amazonResults.Item[i].ImageSets.ImageSet[j].SmallImage.URL));
+					}
+					// Amazon uses a feature array to hold descriptions. This loops through and makes it into a string to display later.
+					if (amazonResults.Item[i].ItemAttributes.Feature) {
+						var numFeatures = amazonResults.Item[i].ItemAttributes.Feature.length;
+						for (var k = 0; k < numFeatures; k++) {
+							amazon.currentItem.description += stringReplace(amazonResults.Item[i].ItemAttributes.Feature[k]) + '<br>';
+						}
+					} else {
+						amazon.currentItem.description = 'no description available';
+					}
 
-			displayItems(amazon.currentItem, 'amazon');
-// end of then
+
+					displayItems(amazon.currentItem, 'amazon');
+				} else {
+					amazon.currentItem.image = [];
+					amazon.currentItem.price = stringReplace(amazonResults.Item.Offers.Offer.OfferListing.Price.FormattedPrice);
+					amazon.currentItem.primeEligible = stringReplace(amazonResults.Item.Offers.Offer.OfferListing.IsEligibleForPrime);
+					amazon.currentItem.model = stringReplace(amazonResults.Item.ItemAttributes.Model);
+					amazon.currentItem.description;
+					amazon.currentItem.name = stringReplace(amazonResults.Item.ItemAttributes.Title);
+					amazon.currentItem.upc = stringReplace(amazonResults.Item.ItemAttributes.UPC);
+					amazon.currentItem.url = stringReplace(amazonResults.Item.DetailPageURL);
+					// Loops through images to store but sets the limit at 5.
+					var numImages = amazonResults.Item.ImageSets.ImageSet.length;
+					if (numImages > 5) {
+						numImages = 5;
+					}
+					if (numImages > 0) {
+						for (var j = 0; j < numImages; j++) {
+							amazon.currentItem.image.unshift(stringReplace(amazonResults.Item.ImageSets.ImageSet[j].SmallImage.URL));
+						}
+					} else {
+						amazon.currentItem.image.unshift(stringReplace(amazonResults.Item.ImageSets.ImageSet.SmallImage.URL));
+					}
+
+					// Amazon uses a feature array to hold descriptions. This loops through and makes it into a string to display later.
+					if (amazonResults.Item[i].ItemAttributes.Feature) {
+						var numFeatures = amazonResults.Item.ItemAttributes.Feature.length;
+						for (var k = 0; k < numFeatures; k++) {
+							amazon.currentItem.description += stringReplace(amazonResults.Item.ItemAttributes.Feature[k]) + '<br>';
+						}
+					} else {
+						amazon.currentItem.description = 'no description available';
+					}
+
+					displayItems(amazon.currentItem, 'amazon');
+				}
+			} else {
+				displayFoundNothing('amazon');
+			}
+			// end of then
 		});
 	}
 };
 
 // This removes unneeded text on data strings from Amazon.
 function stringReplace(string) {
-	console.log(string);
-	if(string){
+	// console.log(string);
+	if (string) {
 		return JSON.stringify(string).slice(10).replace('"', '').replace('}', '').replace('$', '');
-	}else{
+	} else {
 		return '';
 	}
-	
+
 };
