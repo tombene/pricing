@@ -45,6 +45,7 @@ footer {
 .input-group,
 .form-control {
 	width: 45%;
+	margin-bottom: 10px;
 }
  
 .paragraphs,
@@ -64,24 +65,19 @@ footer {
 	margin-top: 10px!important;
 }
 
-.glyphicon-chevron-left::before,
-.glyphicon-chevron-right::before,
-.carousel-indicators {
-	color: black;
-}
-
-.carousel-inner{
-	height: 15vh;
-}
-
 .ebay-div, .walmart-div, .amazon-div {
 	padding: 0 10px 10px 10px;
 	border: 3px dashed #ccc;
 	margin: 5px 10px;
+	text-align: center;
 }
 
-#ebay-container, #walmart-container, #amazon-container {
+#ebay-container, #walmart-container, #amazon-container, #discount-container {
 	margin-bottom: 50px;
+}
+
+.company-name{
+	text-align: center;
 }
 p.hide-me {
   white-space: nowrap;
