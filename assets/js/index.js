@@ -92,4 +92,10 @@ firebase.auth().onAuthStateChanged(function (user) {
 			window.location = '/index.html';
 		}
 	}
-});
+}
+
+function displayFoundNothing(containerName){
+	var div = $('<div>').addClass('row ' + containerName + '-div');
+	div.append('<h1> Sorry ' + containerName + ' failed you. :o( </h1>');
+	$('#' + containerName + '-container').append(div);
+}
