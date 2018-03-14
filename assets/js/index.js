@@ -3,13 +3,14 @@ $('#btn-search').on('click', function () {
 	var searchString = $('#search-input').val();
 	walmart.getItems(searchString, displayItems);
 	discount.getCoupons(searchString);
-	// amazon.getItems(searchString, displayItems);
+	amazon.getItems(searchString, displayItems);
 	ebay.getItems(searchString, displayItems);
 	$('#search-input').val('');
 
 });
 
 function displayItems(data, containerName){
+	console.log("display item", containerName)
 	var div = $('<div>').addClass('row '+containerName+'-div');
 	div.append('<h1>'+'$'+data.price+'</h1>');
 	div.append('<p>'+data.name+'</p>');
