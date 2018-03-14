@@ -1,7 +1,9 @@
-$('#btn-search').on('click', function () {
+$('#btn-search').on('click', function (event) {
+	event.preventDefault(event);
 	if (localStorage.getItem('loggedIn')) {
 		removeContainerChildren();
 		var searchString = $('#search-input').val();
+		searchString.trim();
 		walmart.getItems(searchString, displayItems);
 		amazon.getItems(searchString, displayItems);
 		ebay.getItems(searchString, displayItems);
@@ -14,6 +16,7 @@ $('#btn-search').on('click', function () {
 });
 
 function displayItems(data, containerName) {
+	console.log(data);
 	var div = $('<div>').addClass('row ' + containerName + '-div');
 	div.append('<h1>' + '$' + data.price + '</h1>');
 	div.append('<p>' + data.name + '</p>');

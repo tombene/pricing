@@ -122,6 +122,7 @@ var amazon = {
 			method: "GET",
 			crossDomain: true
 		}).then(function (response) {
+			// console.log(response);
 			var results = xmlToJson(response);
 			var amazonResults = results.ItemSearchResponse.Items;
 			var i = 0;
@@ -156,6 +157,11 @@ var amazon = {
 
 // This removes unneeded text on data strings from Amazon.
 function stringReplace(string) {
-	return JSON.stringify(string).slice(10).replace('"', '').replace('}', '').replace('$', '');
+	console.log(string);
+	if(string){
+		return JSON.stringify(string).slice(10).replace('"', '').replace('}', '').replace('$', '');
+	}else{
+		return '';
+	}
 	
 };
