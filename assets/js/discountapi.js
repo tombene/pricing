@@ -2,7 +2,7 @@ var discount = {
 	url: "https://api.discountapi.com/v2/deals/?query=",
 	getCoupons: function (searchTerm) {
 		$.ajax({
-			url: this.url + searchTerm,
+			url: this.url + searchTerm + "&category_slugs=adult,audio,automotive,beauty_health,crafts_hobbies,electronics,fashion_accessories,fitness_product,food_alcohol, gifts,home_goods,kitchen,luggage,mens_fashion,mobile,movies_music_games,office_supplies,product,tools,toys,women_fashion",
 			method: "GET",
 		}).then(function (response) {
 			console.log(response);
