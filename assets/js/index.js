@@ -21,7 +21,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var path = pathArray[pathArray.length - 1];
 		console.log(path);
 		if (path === 'register.html' || path === 'login.html') {
-			window.location = '/index.html';
+			window.location.replace("index.html");
 		}
 		$('#btn-search').on('click', function (event) {
 			event.preventDefault(event);
@@ -89,7 +89,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var pathArray = window.location.toString().split('/');
 		var path = pathArray[pathArray.length - 1];
 		if (path === 'account.html') {
-			window.location = '/index.html';
+			window.location.replace("index.html");
 		}
 	}
 });
