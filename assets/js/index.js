@@ -89,7 +89,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var pathArray = window.location.toString().split('/');
 		var path = pathArray[pathArray.length - 1];
 		if (path === 'account.html') {
-			window.location = '/index.html';
+			// window.location = '/index.html';
+			window.location.replace('index.html');
 		}
 	}
 });
