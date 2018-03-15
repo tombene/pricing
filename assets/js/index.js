@@ -21,11 +21,11 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var path = pathArray[pathArray.length - 1];
 		console.log(path);
 		if (path === 'register.html' || path === 'login.html') {
-			window.location = '/index.html';
+			window.location.replace("index.html");
 		}
 		$('#btn-search').on('click', function (event) {
 			event.preventDefault(event);
-			if (localStorage.getItem('loggedIn')) {
+			if (user) {
 				removeContainerChildren();
 				var searchString = $('#search-input').val();
 				walmart.getItems(searchString, displayItems);
@@ -89,8 +89,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var pathArray = window.location.toString().split('/');
 		var path = pathArray[pathArray.length - 1];
 		if (path === 'account.html') {
-			// window.location = '/index.html';
-			window.location.replace('index.html');
+			window.location.replace("index.html");
 		}
 	}
 });
