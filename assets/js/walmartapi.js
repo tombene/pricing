@@ -9,7 +9,7 @@ var walmart = {
 		url: ''
 	},
 	getItems: function (searchTerm, displayItems) {
-		queryURL = 'http://api.walmartlabs.com/v1/search?query=' + searchTerm + '&format=json&apiKey=ke74j6r2h3zd93y27veta57j';
+		queryURL = 'https://api.walmartlabs.com/v1/search?query=' + searchTerm + '&format=json&apiKey=ke74j6r2h3zd93y27veta57j';
 		$.ajax({
 			url: queryURL,
 			method: "GET"
