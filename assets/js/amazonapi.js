@@ -196,6 +196,7 @@ var amazon = {
 					}
 
 					displayItems(amazon.currentItem, 'amazon');
+					amazon.currentItem.description = '';
 				}
 			} else {
 				displayFoundNothing('amazon');
