@@ -189,7 +189,7 @@ var amazon = {
 					if (amazonResults.Item[i].ItemAttributes.Feature) {
 						var numFeatures = amazonResults.Item.ItemAttributes.Feature.length;
 						for (var k = 0; k < numFeatures; k++) {
-							amazon.currentItem.description += stringReplace(amazonResults.Item.ItemAttributes.Feature[k]) + '\n';
+							amazon.currentItem.description += stringReplace(amazonResults.Item.ItemAttributes.Feature[k]) + '....';
 						}
 					} else {
 						amazon.currentItem.description = 'no description available';
