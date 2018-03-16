@@ -25,7 +25,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		}
 		$('#btn-search').on('click', function (event) {
 			event.preventDefault(event);
-			if (localStorage.getItem('loggedIn')) {
+			if (user) {
 				removeContainerChildren();
 				var searchString = $('#search-input').val();
 				walmart.getItems(searchString, displayItems);
@@ -95,7 +95,9 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var pathArray = window.location.toString().split('/');
 		var path = pathArray[pathArray.length - 1];
 		if (path === 'account.html') {
+
 			window.location.replace('index.html');
+
 		}
 	}
 });
