@@ -189,14 +189,13 @@ var amazon = {
 					if (amazonResults.Item[i].ItemAttributes.Feature) {
 						var numFeatures = amazonResults.Item.ItemAttributes.Feature.length;
 						for (var k = 0; k < numFeatures; k++) {
-							amazon.currentItem.description += stringReplace(amazonResults.Item.ItemAttributes.Feature[k]) + '<br>';
+							amazon.currentItem.description += stringReplace(amazonResults.Item.ItemAttributes.Feature[k]) + '\n';
 						}
 					} else {
 						amazon.currentItem.description = 'no description available';
 					}
 
 					displayItems(amazon.currentItem, 'amazon');
-					amazon.currentItem.description = '';
 				}
 			} else {
 				displayFoundNothing('amazon');
