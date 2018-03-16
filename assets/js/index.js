@@ -21,7 +21,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var path = pathArray[pathArray.length - 1];
 		console.log(path);
 		if (path === 'register.html' || path === 'login.html') {
-			window.location.replace("index.html");
+			window.location.replace('index.html');
 		}
 		$('#btn-search').on('click', function (event) {
 			event.preventDefault(event);
@@ -34,9 +34,9 @@ firebase.auth().onAuthStateChanged(function (user) {
 				discount.getCoupons(searchString);
 				$('#search-input').val('');
 			}
-			else {
-				window.location.replace("register.html");
-			}
+			// else {
+			// 	window.location.replace("register.html");
+			// }
 		});
 
 		function displayItems(data, containerName) {
@@ -71,7 +71,11 @@ firebase.auth().onAuthStateChanged(function (user) {
 			}
 
 		});
-
+		function displayFoundNothing(containerName) {
+			var div = $('<div>').addClass('row ' + containerName + '-div');
+			div.append('<h1> Sorry ' + containerName + ' failed you. :o( </h1>');
+			$('#' + containerName + '-container').append(div);
+		}
 		function storeSearch(searchString) {
 			if (localStorage.getItem('userKey')) {
 				database.ref('user/' + localStorage.getItem('userKey')).push({
@@ -81,6 +85,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 		}
 
 	} else {
+		$('#btn-search').on('click', function (event) {
+			event.preventDefault(event)});
 		// No user is signed in.
 		$('#accountButton').hide();
 		$('#signoutButton').hide();
@@ -89,13 +95,11 @@ firebase.auth().onAuthStateChanged(function (user) {
 		var pathArray = window.location.toString().split('/');
 		var path = pathArray[pathArray.length - 1];
 		if (path === 'account.html') {
-			window.location.replace("index.html");
+
+			window.location.replace('index.html');
+
 		}
 	}
 });
 
-function displayFoundNothing(containerName){
-	var div = $('<div>').addClass('row ' + containerName + '-div');
-	div.append('<h1> Sorry ' + containerName + ' failed you. :o( </h1>');
-	$('#' + containerName + '-container').append(div);
-}
+
